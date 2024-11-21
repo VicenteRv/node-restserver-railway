@@ -52,6 +52,7 @@ router.delete('/:id',[
     check('id','No es in Id valido').isMongoId(),
     check('id').custom(existeUsuarioPorId),
     validarCampos
-],usuariosDelete);
+],usuariosDelete);//con el id de cualquier usuario nos deja borrar y puede seguirse ejecutando la peticion
+            //hasta que pones el id de la persona de la que se obtuvo el token
 
 module.exports = router;
