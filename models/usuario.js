@@ -21,6 +21,7 @@ const UsuarioSchema = new Schema({
     rol : {
         type: String,
         required: true,
+        default: 'USER_ROLE'
         // enum: ['ADMIN_ROLE','USER_ROLE'] si lo descomentamos debemos poner los roles de la bd
     }, 
     estado: {
@@ -35,7 +36,7 @@ const UsuarioSchema = new Schema({
 
 UsuarioSchema.methods.toJSON = function(){
     const {__v,password,_id, ...usuario } = this.toObject();
-    usuario.uid=_id;
+    usuario.uid=_id;    
     return usuario; 
 }
 
