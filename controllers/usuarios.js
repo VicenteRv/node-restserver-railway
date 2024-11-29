@@ -51,6 +51,7 @@ const usuariosDelete = async(req = request, res = response) => {
     // const usuario = await Usuario.findByIdAndDelete(id);
     //Cambiamos el estado del usuario
     const usuario = await Usuario.findByIdAndUpdate(id,{estado:false});//de momento lo cambio a true para no andarlo cambiando en la bd
+
     res.status(404).json(usuario);
 }
 module.exports = {

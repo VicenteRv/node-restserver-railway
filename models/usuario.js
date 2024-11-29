@@ -1,6 +1,6 @@
 
 const {Schema, model} = require('mongoose');
-
+// ponerle new para que nos salgan las ayudas
 const UsuarioSchema = new Schema({
     nombre: {
         type: String,
@@ -33,7 +33,7 @@ const UsuarioSchema = new Schema({
         default: false,
     }, 
 });
-
+//modifica la respuestas donde se hace el res.json del molelo
 UsuarioSchema.methods.toJSON = function(){
     const {__v,password,_id, ...usuario } = this.toObject();
     usuario.uid=_id;    
@@ -41,6 +41,6 @@ UsuarioSchema.methods.toJSON = function(){
 }
 
 module.exports = model('Usuario',UsuarioSchema);
-
+// Los modelos siempre los vamos a poner con Mayuscula y en singular 'Usuario'
 
 

@@ -1,6 +1,6 @@
 const {Schema,model } = require('mongoose');
-
-const RoleSchema = Schema({
+// ponerle new para que nos salgan las ayudas
+const RoleSchema = new Schema({
     rol:{
         type: String,
         require: [true,"El rol es obligatorio"]
@@ -8,3 +8,4 @@ const RoleSchema = Schema({
 })
 
 module.exports = model('Role',RoleSchema);
+// Los modelos siempre los vamos a poner con Mayuscula y en singular 'Role'

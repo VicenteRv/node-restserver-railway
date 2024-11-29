@@ -40,7 +40,6 @@ const login = async(req = request,res = response)=>{
             msg: 'Hable con el admin'
         })
     }
-
 }
 
 const googleSingIn = async(req = request,res = response) => {
@@ -69,7 +68,6 @@ const googleSingIn = async(req = request,res = response) => {
         //generar el JSWT
         const token = await generarJWT(usuario.id);
 
-
         res.json({
             usuario,
             token
@@ -82,7 +80,6 @@ const googleSingIn = async(req = request,res = response) => {
             msg: 'El token no se pudo verificar'
         })
     }
-
 }
 
 module.exports = {
