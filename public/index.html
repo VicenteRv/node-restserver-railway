@@ -3,9 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso denegado</title>
+    <title>Google Sign-in</title>
 </head>
 <body>
-    <h1>Acceso denegado</h1>
+    <h1>Google Sign-in</h1>
+    <hr>
+    <div id="g_id_onload"
+        data-client_id="908052196828-2nc6mbj156hr9u0numrq897rdtqm89fd.apps.googleusercontent.com"
+        data-auto_prompt="false"
+        data-callback="handleCredentialResponse">
+        
+    </div>
+    <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left">
+    </div>
+    <button id="google-signOut">
+        Signout
+    </button>
+
+
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script>
+        function handleCredentialResponse(response) {
+        //    const responsePayload = decodeJwtResponse(response.credential);
+            // google token: ID_TOKEN
+            //    console.log("ID: " + responsePayload.sub);
+            //    console.log('Full Name: ' + responsePayload.name);
+            //    console.log('Given Name: ' + responsePayload.given_name);
+            //    console.log('Family Name: ' + responsePayload.family_name);
+            //    console.log("Image URL: " + responsePayload.picture);
+            //    console.log("Email: " + responsePayload.email);
+
+            //    console.log('id_token',response.credential);      
+            const body = {id_token: response.credential,arguments}
+            console.log(response.credential,arguments);
+            // fetch('http://localhost:8080/api/auth/google',{
+            fetch('https://node-restserver-railway-production-2308.up.railway.app/api/auth/google',{
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                localStorage.setItem('correo',res.usuario.correo)
+            })
+            .catch(console.warn());
+        }
+        const button = document.getElementById('google-signOut');
+        button.onclick = () =>{
+            console.log(google.accounts.id);
+            google.accounts.id.disableAutoSelect()
+
+            google.accounts.id.revoke(localStorage.getItem('correo'),done =>{
+                localStorage.clear();
+                location.reload();
+            })
+        }
+
+      </script>
 </body>
 </html>
